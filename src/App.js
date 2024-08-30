@@ -30,7 +30,7 @@ function App() {
         <p>{userData.bio}</p>
       </header>
 
-      {currentIndex < petData.length  ? (
+      {currentIndex < petData.length-1  ? (
         <div>
           <PetCard pet={currentPet} />
           <div className="buttons">
