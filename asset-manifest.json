@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/pet-tinder/static/css/main.f855e6bc.css",
-    "main.js": "/pet-tinder/static/js/main.3108647d.js",
+    "main.css": "/pet-tinder/static/css/main.18e5255c.css",
+    "main.js": "/pet-tinder/static/js/main.69927f65.js",
     "static/js/453.d6e1b915.chunk.js": "/pet-tinder/static/js/453.d6e1b915.chunk.js",
-    "static/media/logo.svg": "/pet-tinder/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/pet-tinder/index.html",
-    "main.f855e6bc.css.map": "/pet-tinder/static/css/main.f855e6bc.css.map",
-    "main.3108647d.js.map": "/pet-tinder/static/js/main.3108647d.js.map",
+    "main.18e5255c.css.map": "/pet-tinder/static/css/main.18e5255c.css.map",
+    "main.69927f65.js.map": "/pet-tinder/static/js/main.69927f65.js.map",
     "453.d6e1b915.chunk.js.map": "/pet-tinder/static/js/453.d6e1b915.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.3108647d.js"
+    "static/css/main.18e5255c.css",
+    "static/js/main.69927f65.js"
   ]
 }
