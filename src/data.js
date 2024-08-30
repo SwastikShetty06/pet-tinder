@@ -8,11 +8,11 @@ export const userData = {
     export const petData = [
     {
         id: 1,
-        name: "Bella",
+        name: "Dog-pool",
         type: "Dog",
         breed: "Labrador Retriever",
         age: 2,
-        image: "/images/bella.jpg",
+        imagePet: "https://github.com/SwastikShetty06/pet-tinder/blob/main/public/images/dogpool.jpeg"
     },
     {
         id: 2,
@@ -20,7 +20,7 @@ export const userData = {
         type: "Cat",
         breed: "Maine Coon",
         age: 3,
-        image: "/images/max.jpg",
-    },
+        imagePet:"../public/images/2.jpeg"
+    }
     // Add more pets as needed
     ];
