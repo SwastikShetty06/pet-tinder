@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pet-tinder/static/css/main.0ef21fc2.css",
-    "main.js": "/pet-tinder/static/js/main.2addf118.js",
+    "main.js": "/pet-tinder/static/js/main.1a15b41c.js",
     "static/js/453.d6e1b915.chunk.js": "/pet-tinder/static/js/453.d6e1b915.chunk.js",
     "index.html": "/pet-tinder/index.html",
     "main.0ef21fc2.css.map": "/pet-tinder/static/css/main.0ef21fc2.css.map",
-    "main.2addf118.js.map": "/pet-tinder/static/js/main.2addf118.js.map",
+    "main.1a15b41c.js.map": "/pet-tinder/static/js/main.1a15b41c.js.map",
     "453.d6e1b915.chunk.js.map": "/pet-tinder/static/js/453.d6e1b915.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0ef21fc2.css",
-    "static/js/main.2addf118.js"
+    "static/js/main.1a15b41c.js"
   ]
 }
