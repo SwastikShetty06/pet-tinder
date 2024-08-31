@@ -1,11 +1,7 @@
 const userInput = prompt("Please enter your name:");
-const userAge = prompt("Please enter your Age:");
-const userLocation = prompt("Please enter your Location:");
 const userBio = prompt("Please enter your Bio:");
 export const userData = {
     name: userInput,
-    age: userAge,
-    location: userLocation,
     bio: userBio
     };
 
