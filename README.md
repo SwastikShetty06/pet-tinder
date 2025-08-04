@@ -258,75 +258,6 @@ Frontend will run on `http://localhost:3000`
 └─────────────────┘    └──────────────────┘
 ```
 
-## 🚀 Deployment Guide
-
-### Production Environment Variables
-
-#### Backend (Render)
-```env
-NODE_ENV=production
-PORT=10000
-MONGO_URI=mongodb+srv://pet-tinder-user:pet-tinder-2024@pet-tinder-cluster.r6ftklu.mongodb.net/pet-tinder?retryWrites=true&w=majority
-JWT_SECRET=your_super_secret_jwt_key_here
-CLOUDINARY_URL=cloudinary://899521643387659:YkQ159TggQsHUU-OT6sv3tPHknQ@dla6bjpwn
-```
-
-#### Frontend (Vercel)
-- Automatically detects Next.js configuration
-- API calls routed to production backend URL
-- Static site generation with dynamic API routes
-
-### Deployment Steps (Completed)
-
-✅ **Backend on Render**
-1. Connected GitHub repository
-2. Set root directory to `pet-tinder-backend`
-3. Configured environment variables
-4. Set build command: `npm install`
-5. Set start command: `npm start`
-6. Deployed on free tier with 750 hours/month
-
-✅ **Frontend on Vercel**
-1. Connected GitHub repository
-2. Set root directory to `pet-tinder-frontend`
-3. Configured Next.js build settings
-4. Updated API endpoints for production
-5. Deployed with automatic HTTPS and CDN
-
-✅ **Database on MongoDB Atlas**
-1. Created free M0 cluster
-2. Set up database user and access controls
-3. Configured network access for Render
-4. Connected to backend via connection string
-
-✅ **Image Storage on Cloudinary**
-1. Integrated with backend for image uploads
-2. Automatic image optimization and CDN delivery
-3. Secure URL generation for pet images
-
-### Manual Deployment Instructions
-
-#### Deploy Backend to Render
-1. Sign up at [render.com](https://render.com)
-2. Connect your GitHub repository
-3. Create new Web Service
-4. Set root directory: `pet-tinder-backend`
-5. Configure environment variables (see above)
-6. Deploy with build command: `npm install`
-
-#### Deploy Frontend to Vercel
-1. Sign up at [vercel.com](https://vercel.com)
-2. Connect your GitHub repository
-3. Set root directory: `pet-tinder-frontend`
-4. Deploy with automatic Next.js detection
-5. Update API URLs in production build
-
-#### Set up MongoDB Atlas
-1. Create account at [mongodb.com/atlas](https://www.mongodb.com/atlas)
-2. Create free M0 cluster
-3. Set up database user and network access
-4. Get connection string and update backend env vars
-
 ## 🤝 Contributing
 
 Contributions are welcome! If you'd like to contribute to this project:
@@ -339,16 +270,6 @@ Contributions are welcome! If you'd like to contribute to this project:
 
 Please feel free to reach out to me at [swastikshetty06ss@gmail.com](mailto:swastikshetty06ss@gmail.com) for any questions or collaboration opportunities!
 
-## 📝 Future Enhancements
-
-- [ ] Real-time chat between matched users
-- [ ] Location-based pet discovery
-- [ ] Advanced filtering (age, breed, size)
-- [ ] Push notifications for matches
-- [ ] Social media integration
-- [ ] Pet adoption agency partnerships
-- [ ] Video profiles for pets
-- [ ] AI-powered pet recommendations
 
 ## 📄 License
 
@@ -369,7 +290,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - The amazing open-source community
 
 ---
-
-**Made with ❤️ for pet lovers everywhere** 🐾
 
 For questions or support, please open an issue or contact [swastikshetty06ss@gmail.com](mailto:swastikshetty06ss@gmail.com).
