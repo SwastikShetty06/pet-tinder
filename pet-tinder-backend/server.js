@@ -22,8 +22,12 @@ const app = express();
 connectDB();                                             // ← and only once
 
 // 2. CORS
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://your-app-name.vercel.app'] // We'll update this after Vercel deployment
+  : ['http://localhost:3000', 'http://localhost:3001'];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: allowedOrigins,
   credentials: true,
 }));
 app.options('*', cors());
