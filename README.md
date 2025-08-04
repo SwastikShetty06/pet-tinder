@@ -2,6 +2,8 @@
 
 A Tinder-like application for pet adoption and matching, built with Next.js and Node.js. Swipe through adorable pets, find your perfect companion, and connect with pet owners in your area.
 
+🌐 **[Live Application](https://pet-tinder-frontend-erbpuy3yt-swastikshetty06s-projects.vercel.app)** - Try it now!
+
 **Developed by:** [Swastik Ravi Shetty](https://github.com/SwastikShetty06) - Full Stack Developer passionate about creating scalable applications with modern web technologies.
 
 ![Pet Tinder](https://img.shields.io/badge/Pet-Tinder-ff6b6b?style=for-the-badge&logo=heart&logoColor=white)
@@ -232,18 +234,98 @@ Frontend will run on `http://localhost:3000`
 - **Helmet**: Sets security headers
 - **Input Validation**: Mongoose schema validation
 
-## 🚀 Deployment
+## 🌐 Live Deployment
 
-### Backend Deployment
-1. Set `NODE_ENV=production` in environment variables
-2. Update CORS origins for production domains
-3. Ensure MongoDB connection string points to production database
-4. Deploy to platforms like Heroku, Railway, or DigitalOcean
+### Production URLs
+- **🎯 Frontend (Vercel)**: [https://pet-tinder-frontend-erbpuy3yt-swastikshetty06s-projects.vercel.app](https://pet-tinder-frontend-erbpuy3yt-swastikshetty06s-projects.vercel.app)
+- **🔧 Backend API (Render)**: [https://pet-tinder-96ka.onrender.com](https://pet-tinder-96ka.onrender.com)
+- **🗄️ Database**: MongoDB Atlas (Cloud)
+- **🖼️ Images**: Cloudinary CDN
 
-### Frontend Deployment
-1. Update API base URL for production
-2. Build the application: `npm run build`
-3. Deploy to Vercel, Netlify, or similar platforms
+### Deployment Architecture
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Vercel        │    │   Render         │    │  MongoDB Atlas  │
+│   (Frontend)    │───▶│   (Backend API)  │───▶│   (Database)    │
+│   Next.js       │    │   Node.js/Express│    │   Cloud DB      │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │
+         │                       │
+         ▼                       ▼
+┌─────────────────┐    ┌──────────────────┐
+│   Cloudinary    │    │   GitHub         │
+│   (Images)      │    │   (Source Code)  │
+└─────────────────┘    └──────────────────┘
+```
+
+## 🚀 Deployment Guide
+
+### Production Environment Variables
+
+#### Backend (Render)
+```env
+NODE_ENV=production
+PORT=10000
+MONGO_URI=mongodb+srv://pet-tinder-user:pet-tinder-2024@pet-tinder-cluster.r6ftklu.mongodb.net/pet-tinder?retryWrites=true&w=majority
+JWT_SECRET=your_super_secret_jwt_key_here
+CLOUDINARY_URL=cloudinary://899521643387659:YkQ159TggQsHUU-OT6sv3tPHknQ@dla6bjpwn
+```
+
+#### Frontend (Vercel)
+- Automatically detects Next.js configuration
+- API calls routed to production backend URL
+- Static site generation with dynamic API routes
+
+### Deployment Steps (Completed)
+
+✅ **Backend on Render**
+1. Connected GitHub repository
+2. Set root directory to `pet-tinder-backend`
+3. Configured environment variables
+4. Set build command: `npm install`
+5. Set start command: `npm start`
+6. Deployed on free tier with 750 hours/month
+
+✅ **Frontend on Vercel**
+1. Connected GitHub repository
+2. Set root directory to `pet-tinder-frontend`
+3. Configured Next.js build settings
+4. Updated API endpoints for production
+5. Deployed with automatic HTTPS and CDN
+
+✅ **Database on MongoDB Atlas**
+1. Created free M0 cluster
+2. Set up database user and access controls
+3. Configured network access for Render
+4. Connected to backend via connection string
+
+✅ **Image Storage on Cloudinary**
+1. Integrated with backend for image uploads
+2. Automatic image optimization and CDN delivery
+3. Secure URL generation for pet images
+
+### Manual Deployment Instructions
+
+#### Deploy Backend to Render
+1. Sign up at [render.com](https://render.com)
+2. Connect your GitHub repository
+3. Create new Web Service
+4. Set root directory: `pet-tinder-backend`
+5. Configure environment variables (see above)
+6. Deploy with build command: `npm install`
+
+#### Deploy Frontend to Vercel
+1. Sign up at [vercel.com](https://vercel.com)
+2. Connect your GitHub repository
+3. Set root directory: `pet-tinder-frontend`
+4. Deploy with automatic Next.js detection
+5. Update API URLs in production build
+
+#### Set up MongoDB Atlas
+1. Create account at [mongodb.com/atlas](https://www.mongodb.com/atlas)
+2. Create free M0 cluster
+3. Set up database user and network access
+4. Get connection string and update backend env vars
 
 ## 🤝 Contributing
 
