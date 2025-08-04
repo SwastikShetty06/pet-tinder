@@ -23,7 +23,7 @@ connectDB();                                             // ← and only once
 
 // 2. CORS
 const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? ['https://your-app-name.vercel.app'] // We'll update this after Vercel deployment
+  ? ['https://pet-tinder-frontend.vercel.app', 'https://pet-tinder-frontend-swastikshetty06s-projects.vercel.app'] // Vercel domains
   : ['http://localhost:3000', 'http://localhost:3001'];
 
 app.use(cors({
