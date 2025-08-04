@@ -1,0 +1,27 @@
+services:
+  # Backend API Service
+  - type: web
+    name: pet-tinder-backend
+    env: node
+    region: oregon
+    buildCommand: cd pet-tinder-backend && npm install
+    startCommand: cd pet-tinder-backend && npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    # You'll need to add these environment variables in Render dashboard:
+    # - MONGO_URI (MongoDB Atlas connection string)
+    # - JWT_SECRET (your secret key)
+    # - CLOUDINARY_URL (your cloudinary URL)
+
+  # Static Site for Frontend
+  - type: web
+    name: pet-tinder-frontend
+    env: node
+    region: oregon
+    buildCommand: cd pet-tinder-frontend && npm install && npm run build
+    startCommand: cd pet-tinder-frontend && npm start
+    # You may need to set the API URL environment variable

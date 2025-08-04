@@ -1,0 +1,16 @@
+{
+  "name": "pet-tinder-frontend",
+  "version": 2,
+  "builds": [
+    {
+      "src": "pet-tinder-frontend/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "pet-tinder-frontend/$1"
+    }
+  ]
+}
