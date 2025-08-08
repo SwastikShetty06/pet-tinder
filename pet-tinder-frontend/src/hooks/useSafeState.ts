@@ -1,5 +1,50 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { getMe } from '@/lib/auth';
+
+interface User {
+  name: string;
+  email?: string;
+  id?: string;
+}
+
+export function useAuth() {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const isMountedRef = useRef(true);
+
+  const fetchUser = async () => {
+    try {
+      const response = await getMe();
+      if (isMountedRef.current) {
+        setUser(response.data);
+      }
+    } catch (error) {
+      if (isMountedRef.current) {
+        setUser(null);
+      }
+    } finally {
+      if (isMountedRef.current) {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    fetchUser();
+    
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
+  const refreshUser = () => {
+    fetchUser();
+  };
+
+  return { user, isLoading, refreshUser };
+}
 
 /**
  * A custom hook that provides safe state management to prevent state updates

@@ -1,11 +1,12 @@
 'use client';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { useEffect, useState, useRef } from 'react';
-import { getMe, logout } from '@/lib/auth';
+import { useEffect, useRef } from 'react';
+import { logout } from '@/lib/auth';
+import { useAuth } from '@/hooks/useSafeState';
 
 export default function Navbar() {
-  const [user, setUser] = useState<{ name: string } | null>(null);
+  const { user, isLoading, refreshUser } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const isMountedRef = useRef(true);
@@ -13,34 +14,18 @@ export default function Navbar() {
   // Check if we're on auth pages
   const isAuthPage = pathname === '/login' || pathname === '/signup';
 
+  // Re-fetch user data when pathname changes (after login/logout)
   useEffect(() => {
-    isMountedRef.current = true;
-    
-    const fetchUser = async () => {
-      try {
-        const response = await getMe();
-        if (isMountedRef.current) {
-          setUser(response.data);
-        }
-      } catch (error) {
-        if (isMountedRef.current) {
-          setUser(null);
-        }
-      }
-    };
-    
-    fetchUser();
-    
-    return () => {
-      isMountedRef.current = false;
-    };
-  }, []);
+    if (!isAuthPage) {
+      refreshUser();
+    }
+  }, [pathname, refreshUser]);
 
   const handleLogout = async () => { 
     try {
       await logout(); 
       if (isMountedRef.current) {
-        setUser(null);
+        refreshUser();
         router.push('/login');
       }
     } catch (error) {
@@ -68,7 +53,11 @@ export default function Navbar() {
 
           {/* User Section */}
           <div className="flex items-center gap-4">
-            {user ? (
+            {isLoading ? (
+              <div className="animate-pulse">
+                <div className="w-20 h-8 bg-gray-200 rounded"></div>
+              </div>
+            ) : user ? (
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">

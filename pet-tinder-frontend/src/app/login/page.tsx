@@ -18,7 +18,8 @@ export default function LoginPage() {
       
       // Add a small delay to ensure cookies are set
       setTimeout(() => {
-        router.push('/');
+        // Force a page refresh to update navbar and all components
+        window.location.href = '/';
       }, 100);
     }
     catch (e: any) { 

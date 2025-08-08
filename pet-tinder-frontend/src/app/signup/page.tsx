@@ -10,8 +10,22 @@ export default function SignupPage() {
 
   const handle = async (e: React.FormEvent) => {
     e.preventDefault();
-    try { await signup(name, email, pw); router.push('/'); }
-    catch (e: any) { setError(e.response?.data?.message || 'Signup failed'); }
+    setError(''); // Clear previous errors
+    
+    try { 
+      const response = await signup(name, email, pw);
+      console.log('Signup successful:', response.data);
+      
+      // Add a small delay to ensure cookies are set
+      setTimeout(() => {
+        // Force a page refresh to update navbar and all components
+        window.location.href = '/';
+      }, 100);
+    }
+    catch (e: any) { 
+      console.error('Signup error:', e);
+      setError(e.response?.data?.message || 'Signup failed. Please try again.'); 
+    }
   };
 
   return (
