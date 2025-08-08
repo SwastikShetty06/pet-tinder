@@ -2,7 +2,7 @@
 
 A Tinder-like application for pet adoption and matching, built with Next.js and Node.js. Swipe through adorable pets, find your perfect companion, and connect with pet owners in your area.
 
-🌐 **[Live Application](https://pet-tinder-frontend-erbpuy3yt-swastikshetty06s-projects.vercel.app)** - Try it now!
+🌐 **[Live Application](https://pet-tinder-s.netlify.app)** - Try it now!
 
 **Developed by:** [Swastik Ravi Shetty](https://github.com/SwastikShetty06) - Full Stack Developer passionate about creating scalable applications with modern web technologies.
 
