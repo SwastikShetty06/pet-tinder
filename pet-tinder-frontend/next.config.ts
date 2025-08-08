@@ -12,15 +12,13 @@ const nextConfig: NextConfig = {
     // your project has type errors.
     ignoreBuildErrors: true,
   },
-  // Enable static export for GitHub Pages
-  output: 'export',
-  trailingSlash: true,
-  // Disable image optimization for static export
-  images: {
-    unoptimized: true,
-  },
-  // Ensure proper asset handling
-  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
+  // Remove static export for server-side rendering
+  // output: 'export',
+  // trailingSlash: true,
+  // images: {
+  //   unoptimized: true,
+  // },
+  // assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
 };
 
 export default nextConfig;
