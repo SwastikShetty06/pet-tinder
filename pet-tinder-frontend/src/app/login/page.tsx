@@ -10,8 +10,21 @@ export default function LoginPage() {
 
   const handle = async (e: React.FormEvent) => {
     e.preventDefault();
-    try { await login(email, password); router.push('/'); }
-    catch (e: any) { setError(e.response?.data?.message || 'Login failed'); }
+    setError(''); // Clear previous errors
+    
+    try { 
+      const response = await login(email, password);
+      console.log('Login successful:', response.data);
+      
+      // Add a small delay to ensure cookies are set
+      setTimeout(() => {
+        router.push('/');
+      }, 100);
+    }
+    catch (e: any) { 
+      console.error('Login error:', e);
+      setError(e.response?.data?.message || 'Login failed. Please try again.'); 
+    }
   };
 
   return (

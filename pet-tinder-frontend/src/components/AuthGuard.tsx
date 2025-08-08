@@ -19,12 +19,14 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     
     const checkAuth = async () => {
       try {
-        await getMe();
+        const response = await getMe();
+        console.log('Auth check successful:', response.data);
         // Only update state if component is still mounted
         if (isMountedRef.current) {
           setIsAuthenticated(true);
         }
       } catch (error) {
+        console.error('Auth check failed:', error);
         if (isMountedRef.current) {
           setIsAuthenticated(false);
           router.push('/login');

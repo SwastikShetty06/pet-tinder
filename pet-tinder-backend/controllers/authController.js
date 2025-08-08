@@ -14,11 +14,23 @@ const issueToken = async (user, res) => {
     token,
     expiresAt: new Date(Date.now() + 7*24*60*60*1000),
   });
-  res.cookie('token', token, {
+  
+  // Cookie configuration optimized for mobile browsers
+  const cookieOptions = {
     httpOnly: true,
-    secure:    process.env.NODE_ENV === 'production',
-    maxAge:    7*24*60*60*1000,
-  });
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax', // Better mobile compatibility
+    maxAge: 7*24*60*60*1000, // 7 days
+    path: '/',
+  };
+  
+  // For mobile browsers, we might need to adjust secure flag
+  if (process.env.NODE_ENV === 'production') {
+    cookieOptions.secure = true;
+    cookieOptions.sameSite = 'none'; // Required for cross-origin in production
+  }
+  
+  res.cookie('token', token, cookieOptions);
 };
 
 // @route POST /api/auth/signup
@@ -56,8 +68,15 @@ exports.getMe = (req, res) => {
 // @route POST /api/auth/logout
 exports.logout = async (req, res, next) => {
   try {
-    // Clear the cookie
-    res.clearCookie('token');
+    // Clear the cookie with same options as setting
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    };
+    
+    res.clearCookie('token', cookieOptions);
     
     // Optionally, remove session from database if token is provided
     const token = req.cookies.token;
