@@ -1,13 +1,20 @@
 [build]
   command = "npm run build"
-  publish = ".next"
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "18"
 
+# Handle Next.js routing - this is the key for SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
+  status = 200
+
+# Handle static assets
+[[redirects]]
+  from = "/_next/static/*"
+  to = "/_next/static/:splat"
   status = 200
 
 [[headers]]

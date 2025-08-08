@@ -12,13 +12,15 @@ const nextConfig: NextConfig = {
     // your project has type errors.
     ignoreBuildErrors: true,
   },
-  // Remove static export for server-side rendering
-  // output: 'export',
-  // trailingSlash: true,
-  // images: {
-  //   unoptimized: true,
-  // },
-  // assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
+  // Enable static export for Netlify
+  output: 'export',
+  trailingSlash: true,
+  // Disable image optimization for static export
+  images: {
+    unoptimized: true,
+  },
+  // Ensure proper asset handling
+  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
 };
 
 export default nextConfig;
