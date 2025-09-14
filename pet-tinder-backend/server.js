@@ -19,7 +19,9 @@ const matchRoutes  = require('./routes/matchRoutes');
 const app = express();
 
 // 1. Connect to MongoDB
-connectDB();                                             // ← and only once
+if (process.env.NODE_ENV !== 'test') {
+  connectDB();                                             // ← and only once
+}
 
 // 2. CORS
 const allowedOrigins = process.env.NODE_ENV === 'production'
@@ -60,4 +62,8 @@ app.use(errorHandler);
 
 // 6. Start server
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+}
+
+module.exports = app;
