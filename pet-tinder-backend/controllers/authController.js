@@ -1,6 +1,6 @@
-const jwt    = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User   = require('../models/User');
+const User = require('../models/User');
 const Session = require('../models/Session');
 
 // Helper to issue JWT and set cookie
@@ -12,25 +12,26 @@ const issueToken = async (user, res) => {
   await Session.create({
     userId: user._id,
     token,
-    expiresAt: new Date(Date.now() + 7*24*60*60*1000),
+    expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
   });
-  
+
   // Cookie configuration optimized for mobile browsers
   const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax', // Better mobile compatibility
-    maxAge: 7*24*60*60*1000, // 7 days
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     path: '/',
   };
-  
+
   // For mobile browsers, we might need to adjust secure flag
   if (process.env.NODE_ENV === 'production') {
     cookieOptions.secure = true;
     cookieOptions.sameSite = 'none'; // Required for cross-origin in production
   }
-  
+
   res.cookie('token', token, cookieOptions);
+  return token;
 };
 
 // @route POST /api/auth/signup
@@ -42,8 +43,8 @@ exports.signup = async (req, res, next) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, passwordHash });
-    await issueToken(user, res);
-    res.status(201).json({ id: user._id, name: user.name, email: user.email });
+    const token = await issueToken(user, res);
+    res.status(201).json({ id: user._id, name: user.name, email: user.email, token });
   } catch (err) { next(err); }
 };
 
@@ -55,8 +56,8 @@ exports.login = async (req, res, next) => {
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-    await issueToken(user, res);
-    res.json({ id: user._id, name: user.name, email: user.email });
+    const token = await issueToken(user, res);
+    res.json({ id: user._id, name: user.name, email: user.email, token });
   } catch (err) { next(err); }
 };
 
@@ -75,15 +76,15 @@ exports.logout = async (req, res, next) => {
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/',
     };
-    
+
     res.clearCookie('token', cookieOptions);
-    
+
     // Optionally, remove session from database if token is provided
     const token = req.cookies.token;
     if (token) {
       await Session.deleteOne({ token });
     }
-    
+
     res.json({ message: 'Logged out successfully' });
   } catch (err) {
     next(err);

@@ -25,10 +25,8 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await logout();
-      if (isMountedRef.current) {
-        refreshUser();
-        router.push('/login');
-      }
+      localStorage.removeItem('token'); // Clear token
+      window.location.href = '/login';
     } catch (error) {
       console.error('Logout failed:', error);
     }

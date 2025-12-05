@@ -11,20 +11,25 @@ export default function SignupPage() {
   const handle = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(''); // Clear previous errors
-    
-    try { 
+
+    try {
       const response = await signup(name, email, pw);
       console.log('Signup successful:', response.data);
-      
+
+      // Store token
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+      }
+
       // Add a small delay to ensure cookies are set
       setTimeout(() => {
         // Force a page refresh to update navbar and all components
         window.location.href = '/';
       }, 100);
     }
-    catch (e: any) { 
+    catch (e: any) {
       console.error('Signup error:', e);
-      setError(e.response?.data?.message || 'Signup failed. Please try again.'); 
+      setError(e.response?.data?.message || 'Signup failed. Please try again.');
     }
   };
 
@@ -40,54 +45,54 @@ export default function SignupPage() {
             PawMatch
           </h1>
         </div>
-        
+
         <form onSubmit={handle} className="space-y-6">
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Join the Pack!</h2>
-          
+
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-center">
               {error}
             </div>
           )}
-          
+
           <div className="space-y-4">
             <div>
-              <input 
-                placeholder="Full Name" 
-                value={name} 
-                onChange={e=>setName(e.target.value)} 
+              <input
+                placeholder="Full Name"
+                value={name}
+                onChange={e => setName(e.target.value)}
                 className="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
                 required
               />
             </div>
             <div>
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                value={email} 
-                onChange={e=>setEmail(e.target.value)} 
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 className="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
                 required
               />
             </div>
             <div>
-              <input 
-                type="password" 
-                placeholder="Password" 
-                value={pw} 
-                onChange={e=>setPw(e.target.value)} 
+              <input
+                type="password"
+                placeholder="Password"
+                value={pw}
+                onChange={e => setPw(e.target.value)}
                 className="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
                 required
               />
             </div>
           </div>
-          
-          <button type="submit" 
+
+          <button type="submit"
             className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transform hover:scale-105 transition-all duration-200 shadow-lg"
           >
             Create Account
           </button>
-          
+
           <div className="text-center">
             <p className="text-gray-600">
               Already have an account?{' '}

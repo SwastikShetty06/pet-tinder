@@ -7,4 +7,16 @@ const api = axios.create({
   withCredentials: true,     // ← send cookies on cross-site requests
 });
 
+// Add a request interceptor to attach the token
+api.interceptors.request.use(
+  (config) => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 export default api;
