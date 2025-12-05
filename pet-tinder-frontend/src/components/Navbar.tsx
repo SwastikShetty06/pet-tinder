@@ -4,13 +4,14 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { logout } from '@/lib/auth';
 import { useAuth } from '@/hooks/useSafeState';
+import { PawPrint, LogOut, User, LogIn } from 'lucide-react';
 
 export default function Navbar() {
   const { user, isLoading, refreshUser } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const isMountedRef = useRef(true);
-  
+
   // Check if we're on auth pages
   const isAuthPage = pathname === '/login' || pathname === '/signup';
 
@@ -21,9 +22,9 @@ export default function Navbar() {
     }
   }, [pathname, refreshUser]);
 
-  const handleLogout = async () => { 
+  const handleLogout = async () => {
     try {
-      await logout(); 
+      await logout();
       if (isMountedRef.current) {
         refreshUser();
         router.push('/login');
@@ -36,16 +37,16 @@ export default function Navbar() {
   if (isAuthPage) return null;
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-lg bg-white/80 border-b border-white/20 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+      <div className="max-w-7xl mx-auto glass rounded-2xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center shadow-lg">
-              <span className="text-white text-lg font-bold">🐾</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-lg shadow-pink-200 group-hover:scale-110 transition-transform duration-300">
+              <PawPrint className="text-white w-6 h-6" />
             </div>
             <div className="hidden sm:block">
-              <span className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-heading">
                 PawMatch
               </span>
             </div>
@@ -54,39 +55,39 @@ export default function Navbar() {
           {/* User Section */}
           <div className="flex items-center gap-4">
             {isLoading ? (
-              <div className="animate-pulse">
-                <div className="w-20 h-8 bg-gray-200 rounded"></div>
+              <div className="animate-pulse flex items-center gap-3">
+                <div className="w-8 h-8 bg-slate-200 rounded-full"></div>
+                <div className="w-20 h-4 bg-slate-200 rounded hidden sm:block"></div>
               </div>
             ) : user ? (
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">
-                    <span className="text-white font-semibold text-sm">
-                      {user.name.charAt(0).toUpperCase()}
-                    </span>
+                <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
+                  <div className="w-9 h-9 bg-gradient-to-br from-secondary to-teal-400 rounded-full flex items-center justify-center shadow-md text-white font-bold">
+                    {user.name.charAt(0).toUpperCase()}
                   </div>
-                  <span className="hidden sm:block text-sm font-medium text-gray-700">
+                  <span className="hidden sm:block text-sm font-bold text-slate-700">
                     Hi, {user.name}!
                   </span>
                 </div>
-                <button 
-                  onClick={handleLogout} 
-                  className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200"
+                <button
+                  onClick={handleLogout}
+                  className="p-2 text-slate-400 hover:text-primary hover:bg-pink-50 rounded-full transition-all duration-200"
+                  title="Sign out"
                 >
-                  Sign out
+                  <LogOut className="w-5 h-5" />
                 </button>
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <Link 
-                  href="/login" 
-                  className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200"
+                <Link
+                  href="/login"
+                  className="px-4 py-2 text-sm font-bold text-slate-600 hover:text-primary transition-colors"
                 >
                   Sign in
                 </Link>
-                <Link 
-                  href="/signup" 
-                  className="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                <Link
+                  href="/signup"
+                  className="px-5 py-2 text-sm font-bold text-white bg-gradient-to-r from-primary to-primary-hover rounded-full shadow-lg shadow-pink-200 hover:shadow-pink-300 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   Get started
                 </Link>
